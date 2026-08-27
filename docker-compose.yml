@@ -1,0 +1,33 @@
+# docker-compose up -d
+# docker-compose down
+services:
+
+  sqlserver:
+    image: juan321/sql-server:2022
+    container_name: universidad-sqlserver
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "Admin12345"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+
+  postgres:
+    image: postgres:16
+    container_name: universidad-postgres
+    environment:
+      POSTGRES_DB: universidad
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  sqlserver_data:
+  postgres_data:
+
+
+
